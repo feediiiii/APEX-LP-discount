@@ -1,0 +1,242 @@
+/* src/components/CountdownTimer.css */
+.countdown-timer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  z-index: 2000;
+  min-width: 280px;
+  height: 200px;
+  animation: slideIn 0.6s ease-out;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.countdown-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #888888;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.countdown-close:hover {
+  background: rgba(255, 68, 68, 0.2);
+  color: #ff6b6b;
+}
+
+.countdown-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.countdown-icon {
+  font-size: 2rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.countdown-text h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.countdown-text p {
+  margin: 0;
+  color: #00d4ff;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.countdown-numbers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 0.5rem;
+  min-width: 50px;
+}
+
+.countdown-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.7rem;
+  color: #cccccc;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.countdown-separator {
+  color: #00d4ff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0.25rem;
+}
+
+.countdown-footer {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+}
+
+.countdown-urgency {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ff6b6b;
+  animation: urgentPulse 1.5s infinite;
+}
+
+@keyframes urgentPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .countdown-timer {
+    bottom: 10px;
+    right: 10px;
+    min-width: auto;
+    padding: 1rem;
+  }
+
+  .countdown-numbers {
+    gap: 0.25rem;
+  }
+
+  .countdown-item {
+    min-width: 40px;
+    padding: 0.4rem;
+  }
+
+  .countdown-value {
+    font-size: 1.2rem;
+  }
+
+  .countdown-label {
+    font-size: 0.65rem;
+  }
+
+  .countdown-separator {
+    font-size: 1rem;
+    margin: 0 0.125rem;
+  }
+
+  .countdown-header {
+    gap: 0.5rem;
+  }
+
+  .countdown-icon {
+    font-size: 1.5rem;
+  }
+
+  .countdown-text h3 {
+    font-size: 0.9rem;
+  }
+
+  .countdown-text p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-timer {
+    bottom: 10px;
+    right: 10px;
+    min-width: auto;
+    padding: 1rem;
+  }
+}
+
+/* Add some glow effect for better visibility */
+.countdown-timer::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00d4ff, #0099cc, #ff6b6b, #4ecdc4);
+  border-radius: 18px;
+  z-index: -1;
+  opacity: 0.1;
+  animation: borderGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow {
+  from { opacity: 0.1; }
+  to { opacity: 0.3; }
+}
+
+/* Ensure countdown timer stays visible during scrolling */
+.countdown-timer {
+  will-change: transform;
+  transform: translateZ(0); /* Hardware acceleration for smooth scrolling */
+}
+
+/* Add scroll-based enhancement */
+@media (prefers-reduced-motion: no-preference) {
+  .countdown-timer:hover {
+    animation: none; /* Pause slideIn animation on hover for stability */
+  }
+}
